@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شات أمير علي - Glassmorphism</title>
+    <title>شات أمير علي - VIP Glass</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -14,7 +14,7 @@
     <div id="welcomeModal" class="modal">
         <div class="glass-card animate__animated animate__zoomIn">
             <h2>أهلاً بك</h2>
-            <p>يرجى كتابة اسمك المستعار</p>
+            <p>سجل دخولك لعالمنا</p>
             <input type="text" id="usernameInput" class="ghost-input" placeholder="اسم المستخدم...">
             <button onclick="saveUserAndStart()" class="cyan-btn">دخول</button>
         </div>
@@ -24,22 +24,25 @@
         <div class="glass-card animate__animated animate__fadeInUp">
             <span class="close-modal" onclick="closeRoomModal()">&times;</span>
             <div class="premium-header">
-                <i class="fa-solid fa-gem"></i>
-                <h2>باقة إنشاء غرفة VIP</h2>
+                <i class="fa-solid fa-crown"></i>
+                <h2>باقة الغرف الملكية VIP</h2>
             </div>
             <p class="price-tag">30,000 د.ع / سنوياً</p>
-            <ul class="features-list">
-                <li><i class="fa-solid fa-door-open"></i> إنشاء غرفة خاصة بك</li>
-                <li><i class="fa-solid fa-circle-check" style="color:#00d2ff;"></i> توثيق حساب العميل بعلامة زرقاء</li>
-                <li><i class="fa-solid fa-lock"></i> تحكم كامل (عامة/خاصة) مع كلمة سر</li>
-                <li><i class="fa-solid fa-image"></i> إرسال الصور داخل الشات</li>
-                <li><i class="fa-solid fa-microphone"></i> تشغيل الصوتيات وإرسالها</li>
-                <li><i class="fa-solid fa-user-xmark"></i> تحكم في طرد المستخدمين</li>
-                <li><i class="fa-solid fa-user-shield"></i> ترقية الأعضاء إلى أدمن (4 أشخاص)</li>
-                <li><i class="fa-regular fa-image"></i> رفع صورة لواجهة الشات (الخارج)</li>
-                <li><i class="fa-solid fa-palette"></i> إضافة ثيمة صورة للشات (الداخل)</li>
-            </ul>
-            <button class="cyan-btn" onclick="alert('قريباً...')">اشتراك</button>
+            <div class="features-scroll">
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-house-lock"></i> إنشاء غرفة خاصة بك</li>
+                    <li><i class="fa-solid fa-circle-check" style="color:#00d2ff;"></i> توثيق الحساب (العلامة الزرقاء)</li>
+                    <li><i class="fa-solid fa-unlock-keyhole"></i> التحكم في قفل/فتح الغرفة</li>
+                    <li><i class="fa-solid fa-key"></i> تعيين كلمة مرور للغرفة</li>
+                    <li><i class="fa-solid fa-image"></i> إرسال الصور في الشات</li>
+                    <li><i class="fa-solid fa-microphone-lines"></i> تشغيل وإرسال الصوتيات</li>
+                    <li><i class="fa-solid fa-user-xmark"></i> صلاحية طرد المستخدمين</li>
+                    <li><i class="fa-solid fa-user-shield"></i> ترقية 4 أعضاء إلى "أدمن"</li>
+                    <li><i class="fa-regular fa-image"></i> رفع صورة غلاف خارجية</li>
+                    <li><i class="fa-solid fa-palette"></i> تغيير ثيم الغرفة الداخلي</li>
+                </ul>
+            </div>
+            <button class="cyan-btn" onclick="alert('قريباً...')">اشتراك الآن</button>
         </div>
     </div>
 
@@ -52,64 +55,111 @@
     </header>
 
     <main>
-        <section id="tab-chat" class="tab-content active-tab">
+        <section id="tab-home" class="tab-content active-tab">
+            <div class="soon-container">
+                <div class="glass-card center-content animate__animated animate__pulse animate__infinite">
+                    <i class="fa-solid fa-rocket fa-4x" style="color: #00d2ff; margin-bottom: 20px;"></i>
+                    <h1>قريباً...</h1>
+                    <p>يتم تجهيز واجهة جديدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-chat" class="tab-content">
             
-            <div class="top-pills">
-                <button onclick="showChatView('general')" id="btn-general" class="pill-btn active">الدردشة العامة</button>
-                <button onclick="showChatView('rooms')" id="btn-rooms" class="pill-btn">الغرف yoz</button>
+            <div id="chat-selection-screen" class="chat-selection-screen">
+                <div class="selection-card glass-card" onclick="enterChatMode('general')">
+                    <i class="fa-solid fa-comments"></i>
+                    <h3>الدردشة العامة</h3>
+                    <p>تواصل مع الجميع</p>
+                </div>
+                <div class="selection-card glass-card" onclick="enterChatMode('rooms')">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h3>الغرف yoz</h3>
+                    <p>غرف خاصة ومميزة</p>
+                </div>
             </div>
 
-            <div id="view-general" class="chat-container">
-                <div id="publicChatArea" class="chat-box-full">
-                    <div class="message incoming">
-                        <span class="sender">النظام</span>
-                        <p>أهلاً بكم في الدردشة العامة!</p>
+            <div id="active-chat-interface" class="active-chat-interface" style="display:none;">
+                
+                <div class="chat-internal-header">
+                    <button onclick="exitChatMode()" class="back-btn"><i class="fa-solid fa-arrow-right"></i> رجوع</button>
+                    <span id="currentChatTitle">العامة</span>
+                    <div style="width: 20px;"></div> </div>
+
+                <div id="view-general" class="chat-view-container">
+                    <div id="publicChatArea" class="chat-box-full">
+                        <div class="message incoming">
+                            <span class="sender">النظام</span>
+                            <p>أهلاً بكم في الدردشة العامة!</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-area glass-card-no-padding">
+                        <input type="text" placeholder="اكتب رسالتك..." class="ghost-input chat-input">
+                        <button class="cyan-btn send-icon"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" placeholder="اكتب رسالتك..." class="ghost-input chat-input">
-                    <button class="cyan-btn send-icon"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-            </div>
 
-            <div id="view-rooms" class="rooms-container" style="display:none;">
-                <div class="create-room-trigger">
-                    <button onclick="openCreateRoomModal()" class="cyan-btn full-width">
-                        <i class="fa-solid fa-plus"></i> أنشأ غرفة
-                    </button>
-                </div>
-                <div class="rooms-list-placeholder">
-                    <p>لا توجد غرف حالياً، كن أول من ينشئ!</p>
+                <div id="view-rooms" class="chat-view-container" style="display:none;">
+                    <div class="rooms-header-actions">
+                        <button onclick="openCreateRoomModal()" class="cyan-btn">
+                            <i class="fa-solid fa-plus"></i> أنشأ غرفة
+                        </button>
+                    </div>
+                    <div class="rooms-list-placeholder">
+                        <i class="fa-solid fa-wind fa-3x"></i>
+                        <p>لا توجد غرف نشطة حالياً</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="tab-home" class="tab-content">
-            <div class="admin-banner" id="adminBanner">
-                <img src="https://via.placeholder.com/400x150/764ba2/FFFFFF?text=مساحة+إعلانية" alt="Banner">
-            </div>
-            <div class="menu-grid">
-                <div class="glass-card menu-item"><i class="fa-solid fa-store"></i> المتجر</div>
-                <div class="glass-card menu-item"><i class="fa-solid fa-users"></i> الأعضاء</div>
-            </div>
-            <div class="news-ticker glass-card">
-                <div class="news-title">أخبار</div>
-                <div class="news-content" id="adminNews">مرحباً بكم في التصميم الجديد...</div>
-            </div>
-        </section>
+        <section id="tab-cinema" class="tab-content">
+            <div class="cinema-box glass-card">
+                <div class="movie-header">
+                    <span class="live-badge">مباشر</span>
+                    <h3>فلم السهرة</h3>
+                </div>
+                <div class="movie-poster">
+                    <div class="play-icon"><i class="fa-solid fa-play"></i></div>
+                    <img src="https://via.placeholder.com/400x200/3a0ca3/ffffff?text=Movie+Night" alt="Movie">
+                </div>
+                
+                <div class="movie-info-grid">
+                    <span><i class="fa-solid fa-star" style="color:gold;"></i> 9.8</span>
+                    <span><i class="fa-solid fa-clock"></i> 02:00</span>
+                    <span><i class="fa-solid fa-film"></i> Action</span>
+                    <span><i class="fa-solid fa-language"></i> EN/AR</span>
+                </div>
 
-        <section id="tab-soon" class="tab-content">
-            <div class="soon-box glass-card">
-                <i class="fa-solid fa-rocket fa-3x"></i>
-                <h3>قريباً...</h3>
+                <div class="countdown-timer">
+                    <p>يبدأ العرض بعد:</p>
+                    <div id="timer" class="timer-digits">00:45:30</div>
+                </div>
+            </div>
+
+            <div class="audience-chat glass-card">
+                <div class="chat-header-small"><i class="fa-solid fa-users"></i> دردشة الحضور</div>
+                <div class="chat-box-mini">
+                    <div class="message incoming small-msg">
+                        <span class="sender">علي:</span> متحمس للفلم!
+                    </div>
+                    <div class="message incoming small-msg">
+                        <span class="sender">سارة:</span> متى يبدأ؟
+                    </div>
+                </div>
+                <div class="chat-input-area-mini">
+                    <input type="text" placeholder="علق هنا..." class="ghost-input-mini">
+                    <button class="cyan-btn-mini"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
             </div>
         </section>
     </main>
 
     <nav class="bottom-nav">
-        <button onclick="switchTab('tab-soon')" class="nav-btn"><i class="fa-solid fa-layer-group"></i></button>
-        <button onclick="switchTab('tab-home')" class="nav-btn"><i class="fa-solid fa-house"></i></button>
-        <button onclick="switchTab('tab-chat')" class="nav-btn active-nav"><i class="fa-solid fa-comments"></i></button>
+        <button onclick="switchTab('tab-cinema')" class="nav-btn"><i class="fa-solid fa-film"></i><span>السينما</span></button>
+        <button onclick="switchTab('tab-chat')" class="nav-btn active-nav"><i class="fa-solid fa-comments"></i><span>الدردشة</span></button>
+        <button onclick="switchTab('tab-home')" class="nav-btn"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
     </nav>
 
     <script src="script.js"></script>
