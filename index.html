@@ -11,6 +11,11 @@
 </head>
 <body>
 
+    <div id="customNotification" class="custom-notification">
+        <i class="fa-solid fa-bell"></i>
+        <span id="notificationText">رسالة النظام</span>
+    </div>
+
     <div id="welcomeModal" class="modal">
         <div class="glass-card animate__animated animate__zoomIn">
             <h2>أهلاً بك</h2>
@@ -42,7 +47,7 @@
                     <li><i class="fa-solid fa-palette"></i> تغيير ثيم الغرفة الداخلي</li>
                 </ul>
             </div>
-            <button class="cyan-btn" onclick="alert('قريباً...')">اشتراك الآن</button>
+            <button class="cyan-btn" onclick="showNotification('هذه الميزة ستتوفر قريباً!')">اشتراك الآن</button>
         </div>
     </div>
 
@@ -71,21 +76,19 @@
                 <div class="selection-card glass-card" onclick="enterChatMode('general')">
                     <i class="fa-solid fa-comments"></i>
                     <h3>الدردشة العامة</h3>
-                    <p>تواصل مع الجميع</p>
                 </div>
                 <div class="selection-card glass-card" onclick="enterChatMode('rooms')">
                     <i class="fa-solid fa-layer-group"></i>
                     <h3>الغرف yoz</h3>
-                    <p>غرف خاصة ومميزة</p>
                 </div>
             </div>
 
             <div id="active-chat-interface" class="active-chat-interface" style="display:none;">
-                
                 <div class="chat-internal-header">
                     <button onclick="exitChatMode()" class="back-btn"><i class="fa-solid fa-arrow-right"></i> رجوع</button>
                     <span id="currentChatTitle">العامة</span>
-                    <div style="width: 20px;"></div> </div>
+                    <div style="width: 20px;"></div>
+                </div>
 
                 <div id="view-general" class="chat-view-container">
                     <div id="publicChatArea" class="chat-box-full">
@@ -120,21 +123,17 @@
                     <span class="live-badge">مباشر</span>
                     <h3>فلم السهرة</h3>
                 </div>
+                
                 <div class="movie-poster">
-                    <div class="play-icon"><i class="fa-solid fa-play"></i></div>
-                    <img src="https://via.placeholder.com/400x200/3a0ca3/ffffff?text=Movie+Night" alt="Movie">
+                    <div class="poster-overlay">
+                        <div class="play-icon"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <img src="https://l.top4top.io/p_3683asxqp1.jpg" alt="Movie Night">
                 </div>
                 
-                <div class="movie-info-grid">
-                    <span><i class="fa-solid fa-star" style="color:gold;"></i> 9.8</span>
+                <div class="movie-info-compact">
                     <span><i class="fa-solid fa-clock"></i> 02:00</span>
-                    <span><i class="fa-solid fa-film"></i> Action</span>
-                    <span><i class="fa-solid fa-language"></i> EN/AR</span>
-                </div>
-
-                <div class="countdown-timer">
-                    <p>يبدأ العرض بعد:</p>
-                    <div id="timer" class="timer-digits">00:45:30</div>
+                    <div class="countdown-timer-mini" id="timer">00:00:00</div>
                 </div>
             </div>
 
@@ -147,7 +146,7 @@
                     <div class="message incoming small-msg">
                         <span class="sender">سارة:</span> متى يبدأ؟
                     </div>
-                </div>
+                    </div>
                 <div class="chat-input-area-mini">
                     <input type="text" placeholder="علق هنا..." class="ghost-input-mini">
                     <button class="cyan-btn-mini"><i class="fa-solid fa-paper-plane"></i></button>
