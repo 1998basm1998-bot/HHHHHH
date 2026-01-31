@@ -1,15 +1,11 @@
 :root {
-    /* Nebula Gradient Palette */
+    /* Deep Violet Theme */
     --bg-start: #667eea;
     --bg-end: #764ba2;
     --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.15);
     --text-white: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.7);
-    
-    /* Vibrant Cyan Button */
-    --btn-grad-start: #00d2ff;
-    --btn-grad-end: #3a7bd5;
+    --cyan-grad: linear-gradient(90deg, #00d2ff, #3a7bd5);
 }
 
 * {
@@ -29,7 +25,7 @@ body {
     overflow: hidden;
 }
 
-/* --- Glass Components --- */
+/* Glass Card Global */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
@@ -40,166 +36,172 @@ body {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
-.modal {
+/* Header & Nav */
+header {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: var(--glass-border);
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.bottom-nav {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
+    bottom: 0; width: 100%;
+    height: 70px;
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(20px);
+    border-top: var(--glass-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+.nav-btn {
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    display: flex; flex-direction: column; align-items: center; font-size: 12px;
+}
+.nav-btn i { font-size: 22px; margin-bottom: 4px; }
+.active-nav { color: #00d2ff; }
+
+/* Main Content Area */
+main {
+    flex: 1;
+    overflow: hidden; /* يمنع السكرول للصفحة كلها */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px; /* مسافة للنافبار */
+    position: relative;
+}
+
+.tab-content {
+    display: none;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.active-tab { display: flex; }
+
+/* --- Tab 1: Home (Soon) --- */
+.soon-container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
+    padding: 20px;
 }
+.center-content { text-align: center; width: 100%; }
 
-.modal .glass-card {
-    width: 90%;
-    max-width: 400px;
+/* --- Tab 2: Chat Layout Fixes --- */
+.chat-selection-screen {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+}
+.selection-card {
+    cursor: pointer;
     text-align: center;
-}
-
-/* --- Ghost Inputs --- */
-.ghost-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 12px;
-    color: white;
-    font-size: 16px;
-    outline: none;
     transition: 0.3s;
 }
+.selection-card:active { transform: scale(0.95); background: rgba(255,255,255,0.2); }
+.selection-card i { font-size: 40px; color: #00d2ff; margin-bottom: 10px; }
 
-.ghost-input::placeholder { color: var(--text-muted); }
-.ghost-input:focus { border-color: #00d2ff; box-shadow: 0 0 10px rgba(0, 210, 255, 0.2); }
-
-/* --- Cyan Buttons --- */
-.cyan-btn {
-    background: linear-gradient(90deg, var(--btn-grad-start), var(--btn-grad-end));
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
-    width: 100%; /* Default to full width in modals */
+/* Active Chat Interface (Full Height) */
+.active-chat-interface {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0,0,0,0.2); /* تعتيم خفيف للخلفية */
 }
-.cyan-btn:active { transform: scale(0.95); }
 
-/* --- Header --- */
-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border-bottom: var(--glass-border);
-    padding: 15px 20px;
+.chat-internal-header {
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.user-info { font-weight: bold; font-size: 1.1em; }
+.back-btn {
+    background: none; border: none; color: #fff; font-size: 14px; cursor: pointer;
+}
 
-/* --- Main Layout --- */
-main {
+.chat-view-container {
     flex: 1;
-    overflow-y: hidden; /* Important for chat scrolling */
     display: flex;
     flex-direction: column;
-    padding-bottom: 70px; /* Space for bottom nav */
-}
-
-.tab-content { display: none; height: 100%; flex-direction: column; }
-.active-tab { display: flex; }
-
-/* --- Chat Tab Structure (New) --- */
-.top-pills {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 15px;
-}
-
-.pill-btn {
-    background: rgba(0,0,0,0.2);
-    border: var(--glass-border);
-    color: var(--text-muted);
-    padding: 8px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.pill-btn.active {
-    background: var(--glass-bg);
-    color: white;
-    border-color: white;
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
-}
-
-.chat-container {
-    flex: 1; /* يملأ المساحة المتبقية بالكامل */
-    display: flex;
-    flex-direction: column;
-    padding: 0 15px 15px 15px;
     overflow: hidden;
+    padding: 10px;
 }
 
 .chat-box-full {
-    flex: 1; /* استغلال المساحة الطولية بالكامل */
+    flex: 1; /* يمتد ليأخذ كل المساحة المتاحة */
     overflow-y: auto;
-    background: rgba(0,0,0,0.15);
-    border-radius: 20px;
-    padding: 15px;
+    padding: 10px;
     margin-bottom: 10px;
-    border: var(--glass-border);
+    /* مساحة فارغة في الأسفل لتسهيل القراءة */
 }
 
 .chat-input-area {
     display: flex;
     gap: 10px;
+    padding: 5px;
+    background: var(--glass-bg);
+    border-radius: 50px;
     align-items: center;
 }
-.chat-input-area .ghost-input { margin: 0; }
-.send-icon { width: auto; border-radius: 12px; }
 
-/* --- Rooms View --- */
-.rooms-container {
-    padding: 20px;
-    text-align: center;
+/* --- Tab 3: Cinema --- */
+#tab-cinema { padding: 15px; overflow-y: auto; }
+.cinema-box { margin-bottom: 15px; padding: 15px; position: relative; }
+.movie-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.live-badge { background: red; padding: 2px 8px; border-radius: 5px; font-size: 10px; animation: flash 2s infinite; }
+.movie-poster {
+    width: 100%; height: 180px; position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 15px;
 }
-.full-width { width: 100%; margin-bottom: 20px; }
-
-/* --- Menu & Home --- */
-.menu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding: 15px;
+.movie-poster img { width: 100%; height: 100%; object-fit: cover; }
+.play-icon {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.6); width: 50px; height: 50px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-size: 20px;
 }
-.menu-item { text-align: center; font-size: 1.2em; cursor: pointer; }
-.admin-banner { padding: 15px; }
-.admin-banner img { width: 100%; border-radius: 15px; opacity: 0.9; }
-.news-ticker { margin: 0 15px; display: flex; align-items: center; overflow: hidden; }
-.news-title { background: var(--btn-grad-end); padding: 5px 10px; border-radius: 10px; margin-left: 10px; font-size: 0.9em;}
-
-/* --- Bottom Nav --- */
-.bottom-nav {
-    position: fixed;
-    bottom: 0; width: 100%;
-    background: rgba(20, 20, 40, 0.6); /* Darker glass for nav */
-    backdrop-filter: blur(20px);
-    border-top: var(--glass-border);
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 0;
+.movie-info-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; text-align: center; font-size: 12px; margin-bottom: 15px;
+    background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;
 }
-.nav-btn { background: none; border: none; color: var(--text-muted); font-size: 1.5em; cursor: pointer; }
-.active-nav { color: #00d2ff; text-shadow: 0 0 10px #00d2ff; }
+.countdown-timer { text-align: center; background: var(--cyan-grad); padding: 10px; border-radius: 10px; }
+.timer-digits { font-size: 24px; font-weight: bold; font-family: monospace; }
 
-/* --- Premium List --- */
-.features-list { list-style: none; text-align: right; margin: 20px 0; }
-.features-list li { margin: 10px 0; font-size: 0.9em; display: flex; align-items: center; gap: 10px; }
-.premium-header { color: #00d2ff; margin-bottom: 10px; }
-.price-tag { background: rgba(255,255,255,0.1); display: inline-block; padding: 5px 15px; border-radius: 10px; margin-bottom: 10px; }
-.close-modal { position: absolute; left: 20px; top: 15px; font-size: 1.5em; cursor: pointer; }
+/* Audience Chat */
+.audience-chat { height: 250px; display: flex; flex-direction: column; }
+.chat-box-mini { flex: 1; overflow-y: auto; margin: 10px 0; font-size: 13px; }
+.small-msg { padding: 5px 10px; margin-bottom: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; }
+.chat-input-area-mini { display: flex; gap: 5px; }
+.ghost-input-mini { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.3); border-radius: 15px; padding: 5px 10px; color: white; }
+.cyan-btn-mini { background: #00d2ff; border: none; padding: 5px 15px; border-radius: 15px; color: white; }
+
+/* Common Elements */
+.ghost-input {
+    width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 12px; color: white; outline: none;
+}
+.cyan-btn {
+    background: var(--cyan-grad); color: white; border: none; padding: 12px;
+    border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer;
+}
+.features-scroll { max-height: 200px; overflow-y: auto; margin: 15px 0; text-align: right; }
+.features-list li { margin-bottom: 8px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+
+/* Modal */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center;
+}
+.close-modal { position: absolute; left: 15px; top: 10px; font-size: 24px; cursor: pointer; }
+
+@keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
