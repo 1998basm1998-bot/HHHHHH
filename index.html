@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شات أمير علي - المجتمع الرقمي</title>
+    <title>شات أمير علي - Glassmorphism</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -12,123 +12,104 @@
 <body>
 
     <div id="welcomeModal" class="modal">
-        <div class="modal-content animate__animated animate__zoomIn">
-            <h2 id="adminWelcomeMsg">أهلاً بك في مجتمعنا</h2>
-            <p>يرجى كتابة اسمك المستعار للدخول</p>
-            <input type="text" id="usernameInput" class="fancy-input" placeholder="اسم المستخدم...">
-            <button onclick="saveUserAndStart()" class="flip-btn">دخول</button>
+        <div class="glass-card animate__animated animate__zoomIn">
+            <h2>أهلاً بك</h2>
+            <p>يرجى كتابة اسمك المستعار</p>
+            <input type="text" id="usernameInput" class="ghost-input" placeholder="اسم المستخدم...">
+            <button onclick="saveUserAndStart()" class="cyan-btn">دخول</button>
         </div>
     </div>
 
-    <div id="subscriptionModal" class="modal" style="display:none;">
-        <div class="modal-content animate__animated animate__fadeInUp">
-            <span class="close-modal" onclick="closeSubModal()">&times;</span>
+    <div id="createRoomModal" class="modal" style="display:none;">
+        <div class="glass-card animate__animated animate__fadeInUp">
+            <span class="close-modal" onclick="closeRoomModal()">&times;</span>
             <div class="premium-header">
-                <i class="fa-solid fa-crown"></i>
-                <h2>الدردشة الخاصة VIP</h2>
+                <i class="fa-solid fa-gem"></i>
+                <h2>باقة إنشاء غرفة VIP</h2>
             </div>
-            <p class="price-tag">30,000 دينار / سنوياً</p>
+            <p class="price-tag">30,000 د.ع / سنوياً</p>
             <ul class="features-list">
-                <li><i class="fa-solid fa-lock"></i> قفل وفتح الدردشة والتحكم بالأعضاء</li>
-                <li><i class="fa-solid fa-users-gear"></i> إنشاء جروبات مع صور خاصة</li>
-                <li><i class="fa-solid fa-circle-check" style="color:#1da1f2;"></i> شارة التوثيق الزرقاء</li>
-                <li><i class="fa-solid fa-microphone"></i> إرسال بصمات صوتية</li>
-                <li><i class="fa-solid fa-wand-magic-sparkles"></i> ثيمات خاصة</li>
+                <li><i class="fa-solid fa-door-open"></i> إنشاء غرفة خاصة بك</li>
+                <li><i class="fa-solid fa-circle-check" style="color:#00d2ff;"></i> توثيق حساب العميل بعلامة زرقاء</li>
+                <li><i class="fa-solid fa-lock"></i> تحكم كامل (عامة/خاصة) مع كلمة سر</li>
+                <li><i class="fa-solid fa-image"></i> إرسال الصور داخل الشات</li>
+                <li><i class="fa-solid fa-microphone"></i> تشغيل الصوتيات وإرسالها</li>
+                <li><i class="fa-solid fa-user-xmark"></i> تحكم في طرد المستخدمين</li>
+                <li><i class="fa-solid fa-user-shield"></i> ترقية الأعضاء إلى أدمن (4 أشخاص)</li>
+                <li><i class="fa-regular fa-image"></i> رفع صورة لواجهة الشات (الخارج)</li>
+                <li><i class="fa-solid fa-palette"></i> إضافة ثيمة صورة للشات (الداخل)</li>
             </ul>
-            <button class="flip-btn premium-btn">اشترك الآن</button>
-        </div>
-    </div>
-
-    <div id="challengeModal" class="modal" style="display:none;">
-        <div class="modal-content animate__animated animate__tada">
-            <h3>🔥 تحدي النقاط 🔥</h3>
-            <p>رصيدك الحالي: <span id="currentWalletBalance">0</span> نقطة</p>
-            <input type="number" id="challengePoints" class="fancy-input" placeholder="كم نقطة تتحدى؟">
-            <button onclick="startDiceGame()" class="flip-btn">ابدأ التحدي</button>
-            <div id="diceResult" style="margin-top:15px; font-weight:bold;"></div>
+            <button class="cyan-btn" onclick="alert('قريباً...')">اشتراك</button>
         </div>
     </div>
 
     <header>
         <div class="user-info">
             <span id="displayName">زائر</span>
-            <i class="fa-solid fa-circle-check" id="verifiedBadge" style="display:none; color:cyan;"></i>
+            <i class="fa-solid fa-circle-check" id="verifiedBadge" style="display:none; color:#00d2ff;"></i>
         </div>
-        <div class="wallet-info">
-            <i class="fa-solid fa-coins"></i> <span id="walletPoints">1000</span>
-        </div>
+        <div class="logo-area">Chat App</div>
     </header>
 
     <main>
-        <section id="tab-chat" class="tab-content">
+        <section id="tab-chat" class="tab-content active-tab">
             
-            <div class="audio-player-bar">
-                <i class="fa-solid fa-music"></i>
-                <marquee direction="right">جاري تشغيل: نغمات هادئة للمستخدمين...</marquee>
-                <div class="audio-controls">
-                    <button class="icon-btn"><i class="fa-solid fa-play"></i></button>
-                    <button class="icon-btn"><i class="fa-solid fa-pause"></i></button>
+            <div class="top-pills">
+                <button onclick="showChatView('general')" id="btn-general" class="pill-btn active">الدردشة العامة</button>
+                <button onclick="showChatView('rooms')" id="btn-rooms" class="pill-btn">الغرف yoz</button>
+            </div>
+
+            <div id="view-general" class="chat-container">
+                <div id="publicChatArea" class="chat-box-full">
+                    <div class="message incoming">
+                        <span class="sender">النظام</span>
+                        <p>أهلاً بكم في الدردشة العامة!</p>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" placeholder="اكتب رسالتك..." class="ghost-input chat-input">
+                    <button class="cyan-btn send-icon"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
 
-            <div class="chat-type-selector">
-                <button onclick="showChat('public')" class="flip-btn active-chat-btn">عامة</button>
-                <button onclick="openPrivateSub()" class="flip-btn">خاصة (VIP)</button>
-            </div>
-
-            <div id="publicChatArea" class="chat-box">
-                <div class="message incoming">
-                    <span class="sender">بوت النظام</span>
-                    <p>أهلاً بكم في الدردشة العامة!</p>
+            <div id="view-rooms" class="rooms-container" style="display:none;">
+                <div class="create-room-trigger">
+                    <button onclick="openCreateRoomModal()" class="cyan-btn full-width">
+                        <i class="fa-solid fa-plus"></i> أنشأ غرفة
+                    </button>
                 </div>
-            </div>
-
-            <div class="chat-controls">
-                <button onclick="openChallenge()" class="game-btn flip-btn"><i class="fa-solid fa-dice"></i> تحدي</button>
-                <input type="text" placeholder="اكتب رسالتك..." class="fancy-input chat-input">
-                <button class="send-btn flip-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                <div class="rooms-list-placeholder">
+                    <p>لا توجد غرف حالياً، كن أول من ينشئ!</p>
+                </div>
             </div>
         </section>
 
-        <section id="tab-home" class="tab-content active-tab">
+        <section id="tab-home" class="tab-content">
             <div class="admin-banner" id="adminBanner">
-                <img src="https://via.placeholder.com/400x150/00BFFF/FFFFFF?text=مساحة+إعلانية" alt="Banner">
+                <img src="https://via.placeholder.com/400x150/764ba2/FFFFFF?text=مساحة+إعلانية" alt="Banner">
             </div>
-
-            <div class="main-menu">
-                <div class="menu-grid">
-                    <div class="menu-item"><i class="fa-solid fa-store"></i> المتجر</div>
-                    <div class="menu-item"><i class="fa-solid fa-users"></i> الأعضاء</div>
-                    <div class="menu-item"><i class="fa-solid fa-star"></i> المميزين</div>
-                    <div class="menu-item"><i class="fa-solid fa-gear"></i> الإعدادات</div>
-                </div>
+            <div class="menu-grid">
+                <div class="glass-card menu-item"><i class="fa-solid fa-store"></i> المتجر</div>
+                <div class="glass-card menu-item"><i class="fa-solid fa-users"></i> الأعضاء</div>
             </div>
-
-            <div class="news-ticker">
-                <div class="news-title">عاجل</div>
-                <div class="news-content" id="adminNews">أهلاً بكم في الإصدار الجديد من الموقع... خصومات على الاشتراكات...</div>
+            <div class="news-ticker glass-card">
+                <div class="news-title">أخبار</div>
+                <div class="news-content" id="adminNews">مرحباً بكم في التصميم الجديد...</div>
             </div>
         </section>
 
         <section id="tab-soon" class="tab-content">
-            <div class="soon-box">
+            <div class="soon-box glass-card">
                 <i class="fa-solid fa-rocket fa-3x"></i>
                 <h3>قريباً...</h3>
-                <p>يتم العمل على هذه الميزة حالياً</p>
             </div>
         </section>
     </main>
 
     <nav class="bottom-nav">
-        <button onclick="switchTab('tab-soon')" class="nav-btn flip-btn"><i class="fa-solid fa-layer-group"></i><span>قريباً</span></button>
-        <button onclick="switchTab('tab-chat')" class="nav-btn flip-btn"><i class="fa-solid fa-comments"></i><span>دردش</span></button>
-        
-        <div class="nav-center">
-            <button onclick="switchTab('tab-home')" class="home-btn flip-btn"><i class="fa-solid fa-house"></i></button>
-        </div>
-
-        <button onclick="switchTab('tab-soon')" class="nav-btn flip-btn"><i class="fa-solid fa-bell"></i><span>تنبيهات</span></button>
-        <button onclick="switchTab('tab-soon')" class="nav-btn flip-btn"><i class="fa-solid fa-user"></i><span>بروفيلي</span></button>
+        <button onclick="switchTab('tab-soon')" class="nav-btn"><i class="fa-solid fa-layer-group"></i></button>
+        <button onclick="switchTab('tab-home')" class="nav-btn"><i class="fa-solid fa-house"></i></button>
+        <button onclick="switchTab('tab-chat')" class="nav-btn active-nav"><i class="fa-solid fa-comments"></i></button>
     </nav>
 
     <script src="script.js"></script>
