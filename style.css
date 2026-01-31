@@ -1,5 +1,4 @@
 :root {
-    /* Deep Violet Theme */
     --bg-start: #667eea;
     --bg-end: #764ba2;
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -25,7 +24,30 @@ body {
     overflow: hidden;
 }
 
-/* Glass Card Global */
+/* --- تصميم التنبيه الجديد (Notification) --- */
+.custom-notification {
+    position: fixed;
+    top: -100px; /* مخفي في البداية */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #00d2ff;
+    padding: 15px 25px;
+    border-radius: 30px;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #00d2ff;
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    font-weight: bold;
+    min-width: 250px;
+    justify-content: center;
+}
+.custom-notification.show { top: 20px; }
+
+/* Glass Card */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
@@ -50,8 +72,7 @@ header {
 
 .bottom-nav {
     position: fixed;
-    bottom: 0; width: 100%;
-    height: 70px;
+    bottom: 0; width: 100%; height: 70px;
     background: rgba(20, 20, 40, 0.7);
     backdrop-filter: blur(20px);
     border-top: var(--glass-border);
@@ -67,141 +88,109 @@ header {
 .nav-btn i { font-size: 22px; margin-bottom: 4px; }
 .active-nav { color: #00d2ff; }
 
-/* Main Content Area */
+/* Main Content */
 main {
-    flex: 1;
-    overflow: hidden; /* يمنع السكرول للصفحة كلها */
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 70px; /* مسافة للنافبار */
-    position: relative;
+    flex: 1; overflow: hidden; display: flex;
+    flex-direction: column; padding-bottom: 70px;
 }
 
-.tab-content {
-    display: none;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-}
+.tab-content { display: none; height: 100%; width: 100%; flex-direction: column; }
 .active-tab { display: flex; }
 
-/* --- Tab 1: Home (Soon) --- */
-.soon-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+/* --- Tab: Home --- */
+.soon-container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
 .center-content { text-align: center; width: 100%; }
 
-/* --- Tab 2: Chat Layout Fixes --- */
+/* --- Tab: Chat (Selection Buttons 3D) --- */
 .chat-selection-screen {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
+    flex: 1; padding: 20px; display: flex;
+    flex-direction: column; gap: 20px; justify-content: center;
 }
+/* تعديل الأزرار لتكون شفافة وثلاثية الأبعاد */
 .selection-card {
-    cursor: pointer;
-    text-align: center;
-    transition: 0.3s;
+    cursor: pointer; text-align: center;
+    background: transparent !important; /* شفاف */
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 6px 0 rgba(255,255,255,0.1); /* ظل 3D */
+    transition: all 0.1s;
+    transform: translateY(0);
+    padding: 15px; /* تصغير الحجم */
 }
-.selection-card:active { transform: scale(0.95); background: rgba(255,255,255,0.2); }
-.selection-card i { font-size: 40px; color: #00d2ff; margin-bottom: 10px; }
-
-/* Active Chat Interface (Full Height) */
-.active-chat-interface {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: rgba(0,0,0,0.2); /* تعتيم خفيف للخلفية */
+.selection-card:active {
+    transform: translateY(6px); /* تأثير الضغط */
+    box-shadow: none;
+    border-color: #00d2ff;
 }
+.selection-card i { font-size: 30px; color: #00d2ff; margin-bottom: 5px; }
+.selection-card h3 { font-size: 16px; margin: 0; }
 
+/* Active Chat */
+.active-chat-interface { flex: 1; display: flex; flex-direction: column; background: rgba(0,0,0,0.2); }
 .chat-internal-header {
-    padding: 10px 15px;
-    background: rgba(255,255,255,0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 15px; background: rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
 }
-.back-btn {
-    background: none; border: none; color: #fff; font-size: 14px; cursor: pointer;
-}
+.back-btn { background: none; border: none; color: #fff; font-size: 14px; cursor: pointer; }
+.chat-view-container { flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 10px; }
+.chat-box-full { flex: 1; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
+.chat-input-area { display: flex; gap: 10px; padding: 5px; background: var(--glass-bg); border-radius: 50px; align-items: center; }
 
-.chat-view-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 10px;
-}
+/* --- Tab: Cinema (تعديل الأحجام) --- */
+#tab-cinema { padding: 10px; overflow-y: auto; display: flex; flex-direction: column; }
 
-.chat-box-full {
-    flex: 1; /* يمتد ليأخذ كل المساحة المتاحة */
-    overflow-y: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    /* مساحة فارغة في الأسفل لتسهيل القراءة */
+/* 1. تصغير صندوق الفيديو */
+.cinema-box {
+    flex-shrink: 0; /* منع الانكماش */
+    padding: 10px; margin-bottom: 10px;
 }
+.movie-header { display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center; }
+.live-badge { background: red; padding: 2px 6px; border-radius: 4px; font-size: 10px; animation: flash 2s infinite; font-weight: bold; }
+.movie-header h3 { font-size: 14px; margin: 0; }
 
-.chat-input-area {
-    display: flex;
-    gap: 10px;
-    padding: 5px;
-    background: var(--glass-bg);
-    border-radius: 50px;
-    align-items: center;
-}
-
-/* --- Tab 3: Cinema --- */
-#tab-cinema { padding: 15px; overflow-y: auto; }
-.cinema-box { margin-bottom: 15px; padding: 15px; position: relative; }
-.movie-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.live-badge { background: red; padding: 2px 8px; border-radius: 5px; font-size: 10px; animation: flash 2s infinite; }
 .movie-poster {
-    width: 100%; height: 180px; position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 15px;
+    width: 100%; height: 140px; /* تصغير الارتفاع */
+    position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 8px;
 }
 .movie-poster img { width: 100%; height: 100%; object-fit: cover; }
+.poster-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3); /* تظليل */
+    display: flex; justify-content: center; align-items: center;
+}
 .play-icon {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.6); width: 50px; height: 50px; border-radius: 50%;
-    display: flex; justify-content: center; align-items: center; font-size: 20px;
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-size: 16px; border: 1px solid white;
 }
-.movie-info-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; text-align: center; font-size: 12px; margin-bottom: 15px;
-    background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;
+.movie-info-compact {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 8px; font-size: 12px;
 }
-.countdown-timer { text-align: center; background: var(--cyan-grad); padding: 10px; border-radius: 10px; }
-.timer-digits { font-size: 24px; font-weight: bold; font-family: monospace; }
+.countdown-timer-mini { font-family: monospace; font-weight: bold; color: #00d2ff; }
 
-/* Audience Chat */
-.audience-chat { height: 250px; display: flex; flex-direction: column; }
-.chat-box-mini { flex: 1; overflow-y: auto; margin: 10px 0; font-size: 13px; }
-.small-msg { padding: 5px 10px; margin-bottom: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; }
-.chat-input-area-mini { display: flex; gap: 5px; }
-.ghost-input-mini { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.3); border-radius: 15px; padding: 5px 10px; color: white; }
-.cyan-btn-mini { background: #00d2ff; border: none; padding: 5px 15px; border-radius: 15px; color: white; }
+/* 2. تكبير دردشة الحضور */
+.audience-chat {
+    flex: 1; /* تأخذ باقي المساحة المتاحة */
+    display: flex; flex-direction: column;
+    min-height: 300px; /* ضمان ارتفاع جيد */
+    padding-bottom: 10px;
+}
+.chat-header-small { font-size: 12px; margin-bottom: 5px; color: #ccc; }
+.chat-box-mini { flex: 1; overflow-y: auto; margin: 5px 0; font-size: 13px; }
+.small-msg { padding: 6px 10px; margin-bottom: 5px; background: rgba(255,255,255,0.08); border-radius: 8px; }
 
-/* Common Elements */
-.ghost-input {
-    width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(255,255,255,0.5);
-    border-radius: 12px; color: white; outline: none;
-}
-.cyan-btn {
-    background: var(--cyan-grad); color: white; border: none; padding: 12px;
-    border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer;
-}
+.chat-input-area-mini { display: flex; gap: 5px; padding-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); }
+.ghost-input-mini { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.3); border-radius: 15px; padding: 6px 10px; color: white; font-size: 12px; }
+.cyan-btn-mini { background: #00d2ff; border: none; padding: 0 15px; border-radius: 15px; color: white; cursor: pointer; }
+
+/* Common */
+.ghost-input { width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(255,255,255,0.5); border-radius: 12px; color: white; outline: none; }
+.cyan-btn { background: var(--cyan-grad); color: white; border: none; padding: 12px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; }
 .features-scroll { max-height: 200px; overflow-y: auto; margin: 15px 0; text-align: right; }
 .features-list li { margin-bottom: 8px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
 
 /* Modal */
-.modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center;
-}
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center; }
 .close-modal { position: absolute; left: 15px; top: 10px; font-size: 24px; cursor: pointer; }
 
 @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
